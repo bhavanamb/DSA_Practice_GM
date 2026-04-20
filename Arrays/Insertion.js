@@ -23,4 +23,4 @@ function insertUsingBuiltIn(arr, value) {
 	return arr;
 }
 
-console.log(insertUsingBuiltIn(arr, 5));
+//console.log(insertUsingBuiltIn(arr, 5));
