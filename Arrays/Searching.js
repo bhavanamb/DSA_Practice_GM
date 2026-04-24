@@ -224,31 +224,43 @@ function findPeakElement(arr) {
 }
 
 // Basic - peak in middle
-console.log(findPeakElement([1, 3, 20, 4, 1])); // → 2
+//console.log(findPeakElement([1, 3, 20, 4, 1])); // → 2
 
-// Peak at start
-console.log(findPeakElement([5, 4, 3])); // → 0
+function findSquareRoot(input) {
+	let start = 1;
+	let end = input;
+	let result;
 
-// Peak at end
-console.log(findPeakElement([1, 2, 3])); // → 2
+	if (input === 0) return 0;
 
-// Multiple peaks - any valid index
-console.log(findPeakElement([1, 3, 2, 5, 1])); // → 1 or 3
+	while (start <= end) {
+		let mid = Math.floor((start + end) / 2);
+		let midSquare = mid * mid;
 
-// Single element
-console.log(findPeakElement([5])); // → 0
+		if (midSquare === input) {
+			return mid;
+		} else if (midSquare > input) {
+			end = mid - 1;
+		} else if (midSquare < input) {
+			result = mid;
+			start = mid + 1;
+		}
+	}
+	return result;
+}
 
-// Two elements
-console.log(findPeakElement([1, 2])); // → 1
+// Perfect squares
+console.log(findSquareRoot(4)); // → 5
+// console.log(findSquareRoot(36)); // → 6
+// console.log(findSquareRoot(1)); // → 1
+// console.log(findSquareRoot(4)); // → 2
+// console.log(findSquareRoot(100)); // → 10
 
-// Two elements other way
-console.log(findPeakElement([2, 1])); // → 0
+//Non perfect squares (floor value)
+console.log(findSquareRoot(8)); // → undefined or 2?
+console.log(findSquareRoot(10)); // → undefined or 3?
+console.log(findSquareRoot(15)); // → undefined or 3?
 
-// All same - no peak (edge case)
-console.log(findPeakElement([3, 3, 3])); // → -1 or any (depends on definition)
-
-// Peak right before last
-console.log(findPeakElement([1, 2, 5, 3])); // → 2
-
-// Large array
-console.log(findPeakElement([1, 2, 3, 4, 5, 3, 1])); // → 4
+// Edge cases
+console.log(findSquareRoot(0)); // → 0
+console.log(findSquareRoot(2)); // → undefined or 1?
