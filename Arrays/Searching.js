@@ -300,7 +300,7 @@ function findSquareRoot(input) {
 // minNumberOfPages([12, 34, 67, 90]);
 
 // --Binary SEarch --
-[1, 2, 3, 4];
+//[1, 2, 3, 4];
 function minNumberOfPages(arr, n) {
 	let minPages = Math.max(...arr);
 	let maxPages = arr.reduce((acc, value) => acc + value, 0);
@@ -328,4 +328,28 @@ function minNumberOfPages(arr, n) {
 	return result;
 }
 
-console.log(minNumberOfPages([1, 2, 3, 4], 2));
+//console.log(minNumberOfPages([1, 2, 3, 4], 2));
+
+function kokoEatingBananas(piles, hours) {
+	let min = 1;
+	let max = Math.max(...piles);
+	let result;
+
+	while (min <= max) {
+		let mid = Math.floor((min + max) / 2);
+		let totalHours = 0;
+		for (let i = 0; i < piles.length; i++) {
+			let currentPileHours = Math.ceil(piles[i] / mid);
+			totalHours += currentPileHours;
+		}
+		if (totalHours <= hours) {
+			max = mid - 1;
+			result = mid;
+		} else {
+			min = mid + 1;
+		}
+	}
+	return result;
+}
+
+console.log(kokoEatingBananas([3, 6, 7, 11], 8));
