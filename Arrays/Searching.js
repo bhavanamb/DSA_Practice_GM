@@ -250,17 +250,82 @@ function findSquareRoot(input) {
 }
 
 // Perfect squares
-console.log(findSquareRoot(4)); // → 5
+//console.log(findSquareRoot(4)); // → 5
 // console.log(findSquareRoot(36)); // → 6
 // console.log(findSquareRoot(1)); // → 1
 // console.log(findSquareRoot(4)); // → 2
 // console.log(findSquareRoot(100)); // → 10
 
 //Non perfect squares (floor value)
-console.log(findSquareRoot(8)); // → undefined or 2?
-console.log(findSquareRoot(10)); // → undefined or 3?
-console.log(findSquareRoot(15)); // → undefined or 3?
+// console.log(findSquareRoot(8)); // → undefined or 2?
+// console.log(findSquareRoot(10)); // → undefined or 3?
+// console.log(findSquareRoot(15)); // → undefined or 3?
 
-// Edge cases
-console.log(findSquareRoot(0)); // → 0
-console.log(findSquareRoot(2)); // → undefined or 1?
+// // Edge cases
+// console.log(findSquareRoot(0)); // → 0
+// console.log(findSquareRoot(2)); // → undefined or 1?
+
+//-----------19. Allocate Minimum Number of Pages------------------
+
+// function minNumberOfPages(arr) {
+// 	let maxSum = 0;
+// 	let leftSum = 0;
+// 	let minMaxSum = Infinity;
+
+// 	for (let i = 0; i < arr.length - 1; i++) {
+// 		leftSum = leftSum + arr[i];
+// 		let rightSum = 0;
+// 		console.log("leftSum", leftSum);
+// 		for (let j = i + 1; j < arr.length; j++) {
+// 			console.log("arr[j]", arr[j]);
+// 			rightSum += arr[j];
+// 		}
+
+// 		console.log("rightSum", rightSum);
+
+// 		if (rightSum > leftSum) {
+// 			maxSum = rightSum;
+// 		} else {
+// 			maxSum = leftSum;
+// 		}
+
+// 		if (maxSum < minMaxSum) {
+// 			minMaxSum = maxSum;
+// 		}
+// 	}
+
+// 	console.log("minMaxSum", minMaxSum);
+// }
+
+// minNumberOfPages([12, 34, 67, 90]);
+
+// --Binary SEarch --
+[1, 2, 3, 4];
+function minNumberOfPages(arr, n) {
+	let minPages = Math.max(...arr);
+	let maxPages = arr.reduce((acc, value) => acc + value, 0);
+	let result;
+
+	while (minPages <= maxPages) {
+		let mid = Math.floor((minPages + maxPages) / 2);
+
+		let runningSum = 0;
+		let studentNeeded = 1;
+		for (let i = 0; i < arr.length; i++) {
+			runningSum += arr[i];
+			if (runningSum > mid) {
+				studentNeeded++;
+				runningSum = arr[i];
+			}
+		}
+		if (studentNeeded <= n) {
+			result = mid;
+			maxPages = mid - 1;
+		} else {
+			minPages = mid + 1;
+		}
+	}
+	return result;
+}
+
+console.log(minNumberOfPages([1, 2, 3, 4], 2));
